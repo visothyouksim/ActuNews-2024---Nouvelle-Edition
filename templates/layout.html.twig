@@ -56,8 +56,12 @@
     <!-- header-area-end -->
 
 
+
     <!-- main-area -->
     <main>
+        <!-- flash message -->
+        {% include 'components/_flash.html.twig' %}
+        <!-- flash-message-end -->
         {% block content %}{% endblock %}
     </main>
     <!-- main-area-end -->

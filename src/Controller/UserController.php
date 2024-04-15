@@ -25,19 +25,22 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+        if ($form->isSubmitted()) {
+            # Hashage du mot de passe
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
-                    $form->get('password')->getData()
+                    $user->getPassword()
                 )
             );
 
-            $this->addFlash('success', 'Votre inscription à été effectuée ! Bienvenue parmi nous !');
-
+            # Sauvegarder / Envoyer dans la base de données
             $entityManager->persist($user);
             $entityManager->flush();
+
+            # Notification et redirection
+            $this->addFlash('success', 'Votre inscription à été effectuée ! Vous pouvez désormais vous connecter !');
+            return $this->redirectToRoute('app_login');
         }
 
         # Passage de mon formulaire à la vue
