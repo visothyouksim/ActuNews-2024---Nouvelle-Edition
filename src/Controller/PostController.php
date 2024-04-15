@@ -25,7 +25,7 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Générer le slug à partir du titre
+
             $slug = $slugger->slug($post->getTitle());
             // Convertir l'objet UnicodeString en chaîne de caractères
             $post->setSlug($slug->toString());
