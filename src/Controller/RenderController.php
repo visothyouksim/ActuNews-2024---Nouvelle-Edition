@@ -16,35 +16,35 @@ class RenderController extends AbstractController
 
     }
 
-    public function getCategoryPostCounts(): array
-    {
-        $queryBuilder = $this->manager->createQueryBuilder();
-        $queryBuilder->select('c.name, COUNT(p) as postCount')
-            ->from(Category::class, 'c')
-            ->leftJoin('c.posts', 'p')
-            ->groupBy('c.name');
-    
-        $results = $queryBuilder->getQuery()->getResult();
-        $categoryPostCounts = [];
-        foreach ($results as $result) {
-            $categoryPostCounts[$result['name']] = $result['postCount'];
-        }
-    
-        return $categoryPostCounts;
-    }
+//    public function getCategoryPostCounts(): array
+//    {
+//        $queryBuilder = $this->manager->createQueryBuilder();
+//        $queryBuilder->select('c.name, COUNT(p) as postCount')
+//            ->from(Category::class, 'c')
+//            ->leftJoin('c.posts', 'p')
+//            ->groupBy('c.name');
+//
+//        $results = $queryBuilder->getQuery()->getResult();
+//        $categoryPostCounts = [];
+//        foreach ($results as $result) {
+//            $categoryPostCounts[$result['name']] = $result['postCount'];
+//        }
+//
+//        return $categoryPostCounts;
+//    }
 
 public function renderSidebar(): Response
 {
-    $posts = $this->manager->getRepository(Post::class)->findBy([], ['createdAt' => 'DESC'], 3);
+    $posts = $this->manager->getRepository(Post::class)->findBy([], ['publishedAt' => 'DESC'], 3);
 
     $categories = $this->manager->getRepository(Category::class)->findAll();
 
-    $categoryPostCounts = $this->getCategoryPostCounts();
+//    $categoryPostCounts = $this->getCategoryPostCounts();
 
     return $this->render('components/_sidebar.html.twig', [
         'posts' => $posts,
         'categories' => $categories,
-        'categoryPostCounts' => $categoryPostCounts
+//        'categoryPostCounts' => $categoryPostCounts
     ]);
 }
 

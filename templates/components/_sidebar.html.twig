@@ -7,7 +7,7 @@
                     <a href="{{ path('default_category', {'slug': category.slug}) }}">
                         {{ category.name }}
                     </a>
-                    <span class="float-right">({{ categoryPostCounts[category.name] }})</span>
+                    <span class="float-right">({{ category.posts|length }})</span>
                 </li>
             {% endfor %}
         </ul>
