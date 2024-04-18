@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RenderController extends AbstractController
 {
+    const MAX_POST = 7;
 
     public function __construct(private EntityManagerInterface $manager)
     {
@@ -35,7 +36,7 @@ class RenderController extends AbstractController
 
 public function renderSidebar(): Response
 {
-    $posts = $this->manager->getRepository(Post::class)->findBy([], ['publishedAt' => 'DESC'], 3);
+    $posts = $this->manager->getRepository(Post::class)->findBy([], ['publishedAt' => 'DESC'], self::MAX_POST);
 
     $categories = $this->manager->getRepository(Category::class)->findAll();
 
