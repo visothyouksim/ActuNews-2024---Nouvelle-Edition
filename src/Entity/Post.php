@@ -26,11 +26,6 @@ class Post
     private ?string $title = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\NotBlank(message: 'Attention, n\'oubliez pas votre alias')]
-    #[Assert\Length(
-        max: 255,
-        maxMessage: 'Attention, pas plus de {{ limit }} caractères.'
-    )]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
@@ -50,10 +45,8 @@ class Post
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $deletedAt = null;
 
-    #[ORM\Column(nullable: true)]
-    #[Assert\NotNull(
-        message: 'Attention, n\'oubliez pas la date'
-    )]
+    #[ORM\Column(nullable: false)]
+    #[Assert\NotBlank(message: 'Veuillez saisir une date de publication')]
     private ?\DateTimeImmutable $publishedAt;
 
     /**
@@ -175,7 +168,7 @@ class Post
         return $this->publishedAt;
     }
 
-    public function setPublishedAt(\DateTimeImmutable $publishedAt): static
+    public function setPublishedAt(?\DateTimeImmutable $publishedAt): static
     {
         $this->publishedAt = $publishedAt;
 

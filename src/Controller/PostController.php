@@ -43,6 +43,9 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             # TODO Vérification de l'alias ...
+            $slug = $slugger->slug($post->getTitle());
+            // Convertir l'objet UnicodeString en chaîne de caractères
+            $post->setSlug($slug->toString());
 
             # Récupération du fichier uploadé dans le formulaire
             /** @var UploadedFile $imageFile */

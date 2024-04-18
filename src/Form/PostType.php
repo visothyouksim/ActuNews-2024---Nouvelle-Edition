@@ -28,12 +28,6 @@ class PostType extends AbstractType
                     'placeholder' => '-- Saisissez votre titre --'
                 ]
             ])
-            ->add('slug', TextType::class, [
-                'label' => 'Alias',
-                'attr' => [
-                    'placeholder' => '-- Saisissez un alias --'
-                ]
-            ])
             ->add('categories', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
@@ -52,12 +46,19 @@ class PostType extends AbstractType
                     ])
                 ],
             ])
-            ->add('content', TextareaType::class)
+            ->add('content', TextareaType::class, [
+                'label' => 'Contenu de votre article',
+            ])
             ->add('publishedAt', null, [
                 'widget' => 'single_text',
+                'empty_data' => new \DateTime('now'),
+                'label' => 'Date de publication'
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Enregistrer mon article'
+                'label' => 'Enregistrer mon article',
+                'attr' => [
+                    'class' => 'w-100'
+    ]
             ])
         ;
     }
