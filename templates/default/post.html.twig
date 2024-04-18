@@ -65,36 +65,11 @@
 
                 <!-- SIDEBAR -->
                 <div class="col-xl-3 col-lg-4 col-md-6">
-                    <aside class="blog-sidebar">
-                        <div class="widget sidebar-widget">
-                            <div class="tgAbout-me">
-                                <div class="tgAbout-thumb">
-                                    <img src="assets/img/others/about_me.png" alt="me">
-                                </div>
-                                <div class="tgAbout-info">
-                                    <p class="intro">Hi there, I’m <span>{{ post.user.firstName }} {{ post.user.familyName }}</span></p>
-                                    <span class="designation">Content Writer</span>
-                                </div>
-                                <div class="tgAbout-social">
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-behance"></i></a>
-                                    <a href="#"><i class="fab fa-youtube"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget sidebar-widget widget_categories">
-                            <h4 class="widget-title">Trending Category</h4>
-                            <ul class="list-wrap">
-                                <li>
-                                    <div class="thumb"><a href="blog.html"><img
-                                                    src="assets/img/category/side_category01.jpg" alt="img"></a></div>
-                                    <a href="blog.html">technology</a>
-                                    <span class="float-right">12</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </aside>
+                    <div class="thumb">
+                        {{ render(controller(
+                            'App\\Controller\\RenderController::renderSidebar', {max: 3}
+                        )) }}
+                    </div>
                 </div>
             </div>
         </div>
